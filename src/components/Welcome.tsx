@@ -5,11 +5,12 @@ const Welcome = () => {
   const [isUiFadeOut, setIsUiFadeOut] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isUiFadeIn, setIsUiFadeIn] = useState(false);
+
   const handleVideoLoad = () => {
     setIsVideoLoaded(true);
     setTimeout(() => {
       setIsUiFadeIn(true);
-    }, 1000);
+    }, 500);
   };
 
   const handleLogoClick = () => {
@@ -17,20 +18,18 @@ const Welcome = () => {
     setIsUiFadeOut(true);
     setTimeout(() => {
       navigate('/home');
-    }, 1000);
+    }, 500);
   };
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden bg-black">
-      {/* Image d'arrière-plan */}
-      <img src="/background-no-particles.jpg" alt="Background" className="absolute inset-0 w-full h-full object-cover" />
+    <div className="relative h-screen w-screen overflow-hidden bg-[url('/background-no-particles.jpg')] bg-cover bg-center">
       {/* Vidéo d'arrière-plan */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        className={`absolute inset-0 w-full h-full object-cover ${isVideoLoaded ? 'animate-fade-in' : 'opacity-0'}`}
+        className={`absolute inset-0 w-full h-full object-cover ${!isVideoLoaded ? 'opacity-0' : isUiFadeOut ? 'animate-fade-out' : 'animate-fade-in'}`}
         onLoadedData={handleVideoLoad}
       >
         <source src="/PS5-Menu-Background.webm" type="video/webm" />
@@ -49,7 +48,7 @@ const Welcome = () => {
         <img
           src="/ps-logo.png"
           alt="PlayStation Logo"
-          className={`size-20 bg-white rounded-full ${isUiFadeIn ? 'animate-fade-in' : isUiFadeOut ? 'animate-fade-out' : 'opacity-0'} cursor-pointer hover:scale-95 transition-transform duration-300`}
+          className={`size-16 p-2 bg-white rounded-full ${isUiFadeIn ? 'animate-fade-in' : isUiFadeOut ? 'animate-fade-out' : 'opacity-0'} cursor-pointer hover:scale-95 transition-transform duration-300`}
         />
       </div>
     </div>

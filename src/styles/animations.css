@@ -20,12 +20,53 @@
   }
 }
 
+@keyframes headerFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appsGetIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100vw);
+    scale: 0.8;
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(0);
+    scale: 1.05;
+  }
+  100% {
+    transform: translateX(0);
+    scale: 1;
+    opacity: 1;
+  }
+}
+
 .animate-fade-in {
-  animation: fadeIn 1s ease-in-out forwards;
+  animation: fadeIn 0.5s ease-in-out forwards;
   opacity: 0;
 } 
 
 .animate-fade-out {
-  animation: fadeOut 0.8s ease-in-out forwards;
+  animation: fadeOut 0.4s ease-in-out forwards;
   opacity: 1;
+}
+
+.animate-header-fade-in {
+  animation: headerFadeIn 0.4s 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.animate-apps-get-in {
+  animation: appsGetIn 0.8s ease-in-out forwards;
+  transform: translateX(100%);
+  scale: 0.8;
+  opacity: 0;
 }
