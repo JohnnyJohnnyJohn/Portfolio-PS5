@@ -11,14 +11,14 @@ const Home = () => {
   return (
     <div className="relative min-h-screen w-screen bg-[url('/background-no-particles.jpg')] bg-cover bg-center overflow-hidden">
       {/* Background */}
-      <img src="/bg-home.avif" alt="Background" className={`absolute ${isBgLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'} inset-0 w-full h-full object-cover z-0 transition-all duration-500`} />
+      <img src="/bg-home.avif" alt="Background" className={`absolute ${isBgLoaded ? 'opacity-100 blur-0 scale-100' : 'opacity-0 blur-2xl scale-105'} inset-0 w-full h-full object-cover z-0 transition-all duration-500`} />
       {/* Header */}
       <header className="flex items-center justify-between gap-6 h-24 px-12 animate-header-fade-in">
         <div className="flex items-center justify-center gap-8">
-          <button className="text-xl font-bold tracking-wide px-2 py-3 text-white outline-offset-2 outline-white hover:outline-1 rounded-sm transition-colors">
+          <button className="text-2xl font-bold tracking-wide px-2 py-3 text-white outline-offset-2 outline-white hover:outline-1 rounded-sm transition-colors">
             Jeux
           </button>
-          <button className="text-xl font-light tracking-wide px-2 py-3 text-white outline-offset-2 outline-white hover:outline-1 rounded-sm transition-colors">
+          <button className="text-2xl font-light tracking-wide px-2 py-3 text-white/60 outline-offset-2 outline-white hover:outline-1 rounded-sm transition-colors">
             Contenu multimédia
           </button>
         </div>

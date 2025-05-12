@@ -18,7 +18,7 @@ const Welcome = () => {
     setIsUiFadeOut(true);
     setTimeout(() => {
       navigate('/home');
-    }, 500);
+    }, 300);
   };
 
   return (
