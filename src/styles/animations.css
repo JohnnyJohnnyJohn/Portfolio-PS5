@@ -1,4 +1,4 @@
-@keyframes fadeIn {
+@keyframes welcomeFadeIn {
   0% {
     opacity: 0;
     filter: blur(10px);
@@ -9,7 +9,7 @@
   }
 }
 
-@keyframes fadeOut {
+@keyframes welcomeFadeOut {
   0% {
     opacity: 1;
     filter: blur(0px);
@@ -17,6 +17,25 @@
   100% {
     opacity: 0;
     filter: blur(10px);
+  }
+}
+
+@keyframes btnPsPress {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  5% {
+    transform: scale(0.8);
+    opacity: 0.4;
+  }
+  10% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -49,13 +68,92 @@
   }
 }
 
-.animate-fade-in {
-  animation: fadeIn 0.5s ease-in-out forwards;
-  opacity: 0;
-} 
+@keyframes bgFadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
-.animate-fade-out {
-  animation: fadeOut 0.4s ease-in-out forwards;
+@keyframes bgFadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  80% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bgFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+}
+
+@keyframes textCardFadeIn {
+  0% {
+    opacity: 0;
+    font-size: 0.1rem;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0;
+    font-size: 1.5rem;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    font-size: 1.5rem;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes textCardFadeOut {
+  0% {
+    opacity: 1;
+    font-size: 1.5rem;
+    transform: translateX(100%);
+  }
+  50% {
+    opacity: 0;
+    font-size: 1.5rem;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 0;
+    font-size: 0.1rem;
+    transform: translateX(0);
+  }
+}
+
+.animate-welcome-fade-in {
+  animation: welcomeFadeIn 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.animate-btn-ps-press {
+  animation: btnPsPress 4s 0.5s ease-out infinite;
+}
+
+.animate-welcome-fade-out {
+  animation: welcomeFadeOut 0.4s ease-in-out forwards;
   opacity: 1;
 }
 
@@ -69,4 +167,29 @@
   transform: translateX(100%);
   scale: 0.8;
   opacity: 0;
+}
+
+.animate-bg-fade-in-left {
+  animation: bgFadeInLeft 0.2s ease-in-out forwards;
+  opacity: 0;
+}
+
+.animate-bg-fade-in-right {
+  animation: bgFadeInRight 0.2s ease-in-out forwards;
+  opacity: 0;
+}
+
+.animate-bg-fade-out {
+  animation: bgFadeOut 0.2s ease-in-out forwards;
+  opacity: 1;
+}
+
+.animate-text-card-fade-in {
+  animation: textCardFadeIn 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+.animate-text-card-fade-out {
+  animation: textCardFadeOut 0.2s ease-in-out forwards;
+  opacity: 1;
 }
