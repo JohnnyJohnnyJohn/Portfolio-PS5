@@ -28,37 +28,39 @@ const Welcome = () => {
 
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[url('/background-no-particles.jpg')] bg-cover bg-center">
-      {isOpeningVideoLoaded && ( 
-        <video
-          autoPlay
-          muted
-          playsInline
-          className={`absolute inset-0 w-full h-full object-cover z-10 transition-opacity duration-300 ${isOpeningVideoFadeIn ? 'opacity-100' : 'opacity-0'}`}
-        >
-          <source src="/PS5-Opening.webm" type="video/webm" />
-        </video>
-      )}
-      {isLoadingComplete && (
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className={`absolute inset-0 w-full h-full object-cover z-20 ${isVideoFadeIn ? isUiFadeOut ? 'animate-welcome-fade-out' : 'animate-welcome-fade-in' : ''}`}
-        >
-          <source src="/PS5-Menu-Background.webm" type="video/webm" />
-        </video>
-      )}
-      
       <div className="absolute inset-0 w-full h-full z-30">
         {isLoadingComplete ? (
-          <MainScreen isUiFadeOut={isUiFadeOut} setIsUiFadeOut={setIsUiFadeOut} isVideoLoaded={isVideoLoaded} />
+          <MainScreen setIsUiFadeOut={setIsUiFadeOut} isVideoLoaded={isVideoLoaded} />
         ) : (
           <LoadingScreen 
             onLoadingComplete={() => setIsLoadingComplete(true)}
           />
         )}
       </div>
+      
+      {isLoadingComplete && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className={`absolute inset-0 w-full h-full object-cover z-10 ${isVideoFadeIn ? isUiFadeOut ? 'animate-welcome-fade-out' : 'animate-welcome-fade-in' : ''}`}
+        >
+          <source src="/PS5-Menu-Background.webm" type="video/webm" />
+        </video>
+      )}
+      
+      {isOpeningVideoLoaded && ( 
+        <video
+          autoPlay
+          muted
+          playsInline
+          className={`absolute inset-0 w-full h-full object-cover z-10 transition-opacity ${isOpeningVideoFadeIn ? 'opacity-100 duration-300' : 'opacity-0 duration-1000'}`}
+        >
+          <source src="/PS5-Opening.webm" type="video/webm" />
+        </video>
+      )}
+      
     </div>
   );
 };

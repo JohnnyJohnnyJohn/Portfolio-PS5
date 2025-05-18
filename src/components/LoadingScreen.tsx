@@ -40,7 +40,7 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
   }, []);
 
   return (
-    <div className={`relative h-full w-full flex items-center justify-center overflow-hidden z-50 transition-all duration-300 delay-500 ${isVisible ? 'bg-black' : 'bg-transparent'}`}>
+    <div className={`relative h-full w-full flex items-center justify-center overflow-hidden z-50 transition-all ${isVisible ? 'bg-black' : 'bg-transparent duration-1000 delay-75'}`}>
       {isLogoWhiteVisible ? (
         <img 
         src="/fs-logo-white.png" 

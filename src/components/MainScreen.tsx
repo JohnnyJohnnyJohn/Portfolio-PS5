@@ -4,24 +4,21 @@ import Lottie from 'lottie-react';
 import loadingAnimation from '../assets/loading.json';
 
 interface MainScreenProps {
-  isUiFadeOut: boolean;
   setIsUiFadeOut: (value: boolean) => void;
   isVideoLoaded: boolean;
 }
 
-const MainScreen = ({ isUiFadeOut, setIsUiFadeOut, isVideoLoaded }: MainScreenProps) => {
+const MainScreen = ({ setIsUiFadeOut, isVideoLoaded }: MainScreenProps) => {
   const navigate = useNavigate();
   const [isUiFadeIn, setIsUiFadeIn] = useState(false);
   const [isUiFadeOutState, setIsUiFadeOutState] = useState(false);
   const [isLottieVisible, setIsLottieVisible] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsUiFadeIn(true);
-    }, 500);
+    setIsUiFadeIn(true);
     setTimeout(() => {
       setIsLottieVisible(true);
-    }, 1000);
+    }, 500);
   }, []);
 
   const handleLogoClick = () => {
