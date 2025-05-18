@@ -39,6 +39,41 @@
   }
 }
 
+@keyframes pulsingGlow {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  15% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes movingGlow {
+  0% {
+    transform: translateX(-100%);
+  }
+  35% {
+    transform: translateX(-100%);
+  }
+  70% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+
 @keyframes headerFadeIn {
   0% {
     opacity: 0;
@@ -52,19 +87,13 @@
 
 @keyframes appsGetIn {
   0% {
-    opacity: 0;
     transform: translateX(100vw);
-    scale: 0.8;
   }
   90% {
-    opacity: 1;
     transform: translateX(0);
-    scale: 1.05;
   }
   100% {
     transform: translateX(0);
-    scale: 1;
-    opacity: 1;
   }
 }
 
@@ -96,60 +125,50 @@
   }
 }
 
-@keyframes bgFadeOut {
+@keyframes bgFadeIn {
   0% {
-    opacity: 1;
-    transform: translateX(0);
+    opacity: 0;
   }
   100% {
-    opacity: 0;
-    transform: translateX(-50px);
+    opacity: 1;
   }
 }
 
 @keyframes textCardFadeIn {
   0% {
     opacity: 0;
-    font-size: 0.1rem;
-    transform: translateX(0);
-  }
-  50% {
-    opacity: 0;
-    font-size: 1.5rem;
-    transform: translateX(50%);
   }
   100% {
     opacity: 1;
-    font-size: 1.5rem;
-    transform: translateX(100%);
   }
 }
 
 @keyframes textCardFadeOut {
   0% {
     opacity: 1;
-    font-size: 1.5rem;
-    transform: translateX(100%);
-  }
-  50% {
-    opacity: 0;
-    font-size: 1.5rem;
-    transform: translateX(50%);
   }
   100% {
     opacity: 0;
-    font-size: 0.1rem;
-    transform: translateX(0);
   }
 }
 
 .animate-welcome-fade-in {
   animation: welcomeFadeIn 0.5s ease-in-out forwards;
+  filter: blur(10px);
   opacity: 0;
 }
 
 .animate-btn-ps-press {
   animation: btnPsPress 4s 0.5s ease-out infinite;
+}
+
+.animate-glowing {
+  animation: pulsingGlow 4s ease-out infinite;
+  opacity: 0;
+}
+
+.animate-moving-glow {
+  animation: movingGlow 4s ease-out infinite;
 }
 
 .animate-welcome-fade-out {
@@ -158,15 +177,13 @@
 }
 
 .animate-header-fade-in {
-  animation: headerFadeIn 0.5s 0.5s ease-in-out forwards;
+  animation: headerFadeIn 0.5s 1.5s ease-out forwards;
   opacity: 0;
 }
 
 .animate-apps-get-in {
-  animation: appsGetIn 0.8s ease-in-out forwards;
+  animation: appsGetIn 0.8s ease-out forwards;
   transform: translateX(100%);
-  scale: 0.8;
-  opacity: 0;
 }
 
 .animate-bg-fade-in-left {
@@ -179,13 +196,13 @@
   opacity: 0;
 }
 
-.animate-bg-fade-out {
-  animation: bgFadeOut 0.2s ease-in-out forwards;
-  opacity: 1;
+.animate-bg-fade-in {
+  animation: bgFadeIn 0.2s ease-in-out forwards;
+  opacity: 0;
 }
 
 .animate-text-card-fade-in {
-  animation: textCardFadeIn 0.5s ease-in-out forwards;
+  animation: textCardFadeIn 0.5s 0.2s ease-out forwards;
   opacity: 0;
 }
 

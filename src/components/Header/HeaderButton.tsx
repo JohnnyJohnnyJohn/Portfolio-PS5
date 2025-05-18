@@ -13,13 +13,12 @@ export const HeaderButton = ({ children, variant = 'light', className = '' }: He
         text-2xl 
         ${variant === 'bold' ? 'font-bold text-white' : 'font-light text-white/60'}
         tracking-wide 
-        px-2 
-        py-3 
-        outline-offset-2 
+        p-2 
+        outline-offset-3 
         outline-transparent 
         hover:outline-white 
-        hover:outline-1 
-        rounded-sm 
+        hover:outline-2 
+        rounded-xs
         transition-colors
         ${className}
       `}

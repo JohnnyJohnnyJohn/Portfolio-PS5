@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Header } from './Header/Header';
 import { GameCard } from './GameCard';
 
-type Game = {
+export type Game = {
   id: string;
   title: string;
   iconSrc: string;
@@ -26,6 +26,7 @@ const Home = () => {
   const [cardHoveredOrder, setCardHoveredOrder] = useState<number | undefined>(undefined);
   const [currentTime, setCurrentTime] = useState(getTime());
   const [newBg, setNewBg] = useState<string | undefined>(undefined);
+  const [isFirstAnimation, setIsFirstAnimation] = useState(true);
 
   const getBg = (id: string) => {
     switch (id) {
@@ -41,8 +42,10 @@ const Home = () => {
   };
 
   useEffect(() => {
-    setCardHovered(GAMES[0]);
-    setCardHoveredOrder(GAMES[0].order);
+    setTimeout(() => {
+      setCardHovered(GAMES[3]);
+    }, 1600);
+
     const interval = setInterval(() => {
       setCurrentTime(getTime());
     }, 1000);
@@ -51,12 +54,33 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    setNewBg(getBg(cardHovered?.id ?? ''));
-    document.getElementById('bg_active')?.classList.add(cardHoveredOrder && cardHovered?.order ? cardHoveredOrder < cardHovered?.order ? 'animate-bg-fade-in-left' : 'animate-bg-fade-in-right' : '');
-    setTimeout(() => {
-      document.getElementById('bg_active')?.classList.remove(cardHoveredOrder && cardHovered?.order ? cardHoveredOrder < cardHovered?.order ? 'animate-bg-fade-in-left' : 'animate-bg-fade-in-right' : '');
-      setCardHoveredOrder(cardHovered?.order);
-    }, 200);
+    if (!cardHovered) return;
+    
+    const bg = getBg(cardHovered.id);
+    setNewBg(bg);
+
+    // Attendre que l'image soit chargée avant d'ajouter l'animation
+    const img = new Image();
+    img.src = bg || '';
+    img.onload = () => {
+      if (isFirstAnimation) {
+        requestAnimationFrame(() => {
+          document.getElementById('bg_active')?.classList.add('animate-bg-fade-in');
+          setTimeout(() => {
+            document.getElementById('bg_active')?.classList.remove('animate-bg-fade-in');
+            setCardHoveredOrder(cardHovered.order);
+            setIsFirstAnimation(false);
+          }, 300);
+        });
+      } else if (cardHoveredOrder && cardHovered.order) {
+        const animation = cardHoveredOrder < cardHovered.order ? 'animate-bg-fade-in-left' : 'animate-bg-fade-in-right';
+        document.getElementById('bg_active')?.classList.add(animation);
+        setTimeout(() => {
+          document.getElementById('bg_active')?.classList.remove(animation);
+          setCardHoveredOrder(cardHovered.order);
+        }, 300);
+      }
+    };
   }, [cardHovered]);
 
   return (
@@ -73,9 +97,9 @@ const Home = () => {
           {GAMES.map(game => (
             <GameCard
               key={game.id}
-              {...game}
+              game={game}
               isHovered={cardHovered?.id === game.id}
-              onHover={() => setCardHovered(game)}
+              onHover={setCardHovered}
             />
           ))}
         </div>

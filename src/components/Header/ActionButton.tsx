@@ -16,12 +16,12 @@ export const ActionButton = ({ children, tooltip, variant = 'default', className
     font-light 
     rounded-full 
     text-white 
-    outline-offset-2 
+    outline-offset-3 
     outline-transparent 
     hover:outline-white 
-    hover:outline-1 
+    hover:outline-2 
     transition-colors
-    ${variant === 'default' ? 'p-2 hover:bg-white hover:text-black' : 'bg-white/10'}
+    ${variant === 'default' ? 'p-2 hover:bg-white hover:text-black' : 'p-0.5 bg-white/10'}
     ${className}
   `;
 
@@ -45,7 +45,7 @@ export const ActionButton = ({ children, tooltip, variant = 'default', className
         ${variant === 'avatar' ? 'flex items-center justify-center gap-2' : ''}
       `}>
         {tooltip}
-        {variant === 'avatar' && <img src="/icons/psplus.png" alt="PS Plus" className="size-5" />}
+        {variant === 'avatar' && <img src="/icons/psplusmini.webp" alt="PS Plus" className="size-5" />}
       </span>
     </button>
   );

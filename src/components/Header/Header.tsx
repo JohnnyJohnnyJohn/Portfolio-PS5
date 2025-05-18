@@ -30,7 +30,7 @@ export const Header = ({ currentTime }: HeaderProps) => {
           <img 
             src="/icons/avatar.png" 
             alt="Avatar" 
-            className="size-8 rounded-full group-hover:scale-105 transition-all duration-300" 
+            className="size-9 rounded-full group-hover:scale-105 transition-all duration-300" 
           />
           <div className="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full"></div>
         </ActionButton>
