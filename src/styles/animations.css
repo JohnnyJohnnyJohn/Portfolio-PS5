@@ -167,8 +167,12 @@
   opacity: 0;
 }
 
-.animate-moving-glow {
+.animate-moving-glow-ps-btn {
   animation: movingGlow 4s ease-out infinite;
+}
+
+.animate-moving-glow-card-header-btn {
+  animation: movingGlow 8s ease-out infinite;
 }
 
 .animate-welcome-fade-out {

@@ -4,10 +4,11 @@ import type { Game } from "./Home";
 interface GameCardProps {
   game: Game;
   isHovered: boolean;
+  isFirstAnimation: boolean;
   onHover: (game: Game) => void;
 }
 
-export const GameCard = ({ game, isHovered, onHover }: GameCardProps) => {
+export const GameCard = ({ game, isHovered, isFirstAnimation, onHover }: GameCardProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -19,19 +20,21 @@ export const GameCard = ({ game, isHovered, onHover }: GameCardProps) => {
   return (
     <button 
       onMouseEnter={() => onHover(game)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter') {
+          onHover(game);
+        }
+      }}
       className={`
         relative 
         text-white 
         bg-gradient-to-tr from-black/30 via-black/40 to-black/30
-        backdrop-blur-xl
+        backdrop-blur-xs
         p-0 
-        text-2xl 
-        font-light 
-        tracking-widest 
         outline-offset-4 
         transition-all 
         ease-out
-        duration-300
+        ${isFirstAnimation ? 'duration-500' : 'duration-300'}
         ${isHovered ? `rounded-3xl size-36 outline-3 outline-white` : `rounded-xl size-24 outline-transparent`}
         ${isVisible ? 'scale-100' : 'scale-20'}
       `}
@@ -45,8 +48,10 @@ export const GameCard = ({ game, isHovered, onHover }: GameCardProps) => {
           right-0 
           text-white 
           pl-4 
-          pb-1.5
+          pb-[5px]
+          text-2xl 
           font-light 
+          tracking-wide
           transition-all 
           duration-300 
           -z-20
@@ -58,7 +63,7 @@ export const GameCard = ({ game, isHovered, onHover }: GameCardProps) => {
       </span>
       {isHovered && (
         <div className="absolute inset-0 flex items-center justify-center size-full rounded-3xl overflow-hidden z-50">
-          <div className="absolute scale-150 rotate-[30deg] size-full opacity-20 bg-gradient-to-r from-transparent via-white to-transparent animate-moving-glow"></div>
+          <div className="absolute scale-150 rotate-[30deg] size-full opacity-20 bg-gradient-to-r from-transparent via-white to-transparent animate-moving-glow-card-header-btn"></div>
         </div>
       )}
     </button>

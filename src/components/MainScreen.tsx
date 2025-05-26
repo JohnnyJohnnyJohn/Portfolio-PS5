@@ -13,6 +13,7 @@ const MainScreen = ({ setIsUiFadeOut, isVideoLoaded }: MainScreenProps) => {
   const [isUiFadeIn, setIsUiFadeIn] = useState(false);
   const [isUiFadeOutState, setIsUiFadeOutState] = useState(false);
   const [isLottieVisible, setIsLottieVisible] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     setIsUiFadeIn(true);
@@ -31,7 +32,7 @@ const MainScreen = ({ setIsUiFadeOut, isVideoLoaded }: MainScreenProps) => {
   };
 
   return (
-    <div className="relative h-screen w-screen overflow-hidden z-50">
+    <div className="relative h-screen w-screen overflow-hidden z-50" >
 
       <p className={`absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-xl font-light tracking-wide ${isUiFadeIn ? 'animate-welcome-fade-in' : isUiFadeOutState ? 'animate-welcome-fade-out' : 'opacity-0'}`}>
         Appuyez sur la touche FS de votre manette.
@@ -53,11 +54,33 @@ const MainScreen = ({ setIsUiFadeOut, isVideoLoaded }: MainScreenProps) => {
             src="/fs-logo-btn.png"
             alt="PlayStation Logo"
             onClick={handleLogoClick}
-            className={`size-16 rounded-full relative z-10 ${isUiFadeIn ? 'animate-welcome-fade-in' : isUiFadeOutState ? 'animate-welcome-fade-out' : 'opacity-0'} cursor-pointer hover:scale-95 transition-transform duration-300`}
+            className={`size-16 rounded-full relative z-10 ${isUiFadeIn ? 'animate-welcome-fade-in' : isUiFadeOutState ? 'animate-welcome-fade-out' : 'opacity-0'} cursor-pointer ${isHovered ? 'scale-90 opacity-70' : ''} transition-transform duration-300`}
           />
           {isVideoLoaded && (
-            <div onClick={handleLogoClick} className={`absolute inset-0 flex items-center justify-center size-17 rounded-full overflow-hidden z-50 cursor-pointer ${isUiFadeOutState ? 'animate-welcome-fade-out' : 'blur-sm'}`}>
-              <div className="absolute scale-x-150 size-full bg-gradient-to-r from-transparent via-[#FEFBFC] to-transparent animate-moving-glow"></div>
+            <div 
+              onClick={handleLogoClick} 
+              onMouseEnter={() => {
+                setIsHovered(true);
+              }}
+              onMouseLeave={() => {
+                setIsHovered(false);
+              }}
+              onFocus={() => {
+                setIsHovered(true);
+              }}
+              onBlur={() => {
+                setIsHovered(false);
+              }}
+              tabIndex={0} 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  handleLogoClick();
+                }
+              }} 
+              autoFocus={true}
+              className={`absolute inset-0 flex items-center justify-center size-16 rounded-full overflow-hidden z-50 cursor-pointer focus:outline-none ${isUiFadeOutState ? 'animate-welcome-fade-out' : 'blur-sm'}`}
+            >
+              <div className="absolute scale-x-150 size-full bg-gradient-to-r from-transparent via-[#FEFBFC] to-transparent animate-moving-glow-ps-btn"></div>
             </div>
           )}
         </div>

@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        nunito: ['"Nunito Sans"', 'sans-serif'],
+        open: ['"Open Sans"', 'sans-serif'],
       },
     },
   },

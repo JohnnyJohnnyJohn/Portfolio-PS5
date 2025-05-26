@@ -10,9 +10,9 @@ export type Game = {
 }
 
 const GAMES: Game[] = [
-  { id: 'psplus', title: 'PS Plus', iconSrc: '/icons/psplus.png', order: 1 },
-  { id: 'psstore', title: 'PS Store', iconSrc: '/icons/psstore.png', order: 2 },
-  { id: 'welcome', title: 'Welcome', iconSrc: '/icons/welcome.png', order: 3 },
+  { id: 'welcome', title: 'Bienvenue', iconSrc: '/icons/welcome.png', order: 1 },
+  { id: 'psplus', title: 'PS Plus', iconSrc: '/icons/psplus.png', order: 2 },
+  { id: 'psstore', title: 'PS Store', iconSrc: '/icons/psstore.png', order: 3 },
   { id: 'gta6', title: 'GTA 6', iconSrc: '/icons/gta6.png', order: 4 },
   { id: 'shadows', title: "Assassin's Creed: Shadows", iconSrc: '/icons/shadows.png', order: 5 },
   { id: 'fc25', title: 'Fifa 25', iconSrc: '/icons/fc25.png', order: 6 },
@@ -27,6 +27,8 @@ const Home = () => {
   const [currentTime, setCurrentTime] = useState(getTime());
   const [newBg, setNewBg] = useState<string | undefined>(undefined);
   const [isFirstAnimation, setIsFirstAnimation] = useState(true);
+  const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+  const [isNotifMicControllerVisible, setIsNotifMicControllerVisible] = useState(false);
 
   const getBg = (id: string) => {
     switch (id) {
@@ -43,7 +45,8 @@ const Home = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      setCardHovered(GAMES[3]);
+      setIsLoadingComplete(true);
+      setCardHovered(GAMES[0]);
     }, 1600);
 
     const interval = setInterval(() => {
@@ -70,7 +73,16 @@ const Home = () => {
             document.getElementById('bg_active')?.classList.remove('animate-bg-fade-in');
             setCardHoveredOrder(cardHovered.order);
             setIsFirstAnimation(false);
-          }, 300);
+            setTimeout(() => {
+              setIsNotifMicControllerVisible(true);
+              setTimeout(() => {
+                setIsNotifMicControllerVisible(false);
+                setTimeout(() => {
+                  document.getElementById('notif-mic-controller')?.classList.add('hidden');
+                }, 500);
+              }, 5500);
+            }, 500);
+          }, 200);
         });
       } else if (cardHoveredOrder && cardHovered.order) {
         const animation = cardHoveredOrder < cardHovered.order ? 'animate-bg-fade-in-left' : 'animate-bg-fade-in-right';
@@ -78,7 +90,7 @@ const Home = () => {
         setTimeout(() => {
           document.getElementById('bg_active')?.classList.remove(animation);
           setCardHoveredOrder(cardHovered.order);
-        }, 300);
+        }, 200);
       }
     };
   }, [cardHovered]);
@@ -91,15 +103,18 @@ const Home = () => {
       {/* Header */}
       <Header currentTime={currentTime} />
 
+      <img id="notif-mic-controller" src="/notif-mic-controller.png" alt="PS Logo" className={`absolute top-7 right-7 h-18 z-50 transition-all duration-300 ease-out ${isNotifMicControllerVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`} />
+
       {/* Main */}
       <main className="relative flex-1 flex z-50">
-        <div className="flex items-start justify-center gap-4 px-16 animate-apps-get-in z-50">
+        <div className={`flex items-start justify-center gap-4 px-16 animate-apps-get-in z-50 transition-all duration-500 ease-out ${isLoadingComplete ? 'pt-0' : 'pt-6'}`}>
           {GAMES.map(game => (
             <GameCard
               key={game.id}
               game={game}
               isHovered={cardHovered?.id === game.id}
-              onHover={setCardHovered}
+              isFirstAnimation={isFirstAnimation}
+              onHover={isLoadingComplete ? setCardHovered : () => {}}
             />
           ))}
         </div>

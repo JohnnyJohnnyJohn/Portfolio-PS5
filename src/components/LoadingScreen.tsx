@@ -19,11 +19,11 @@ const LoadingScreen = ({ onLoadingComplete }: LoadingScreenProps) => {
           setIsTextVisible(true);
         }, 300);
       }, 300);
-    }, 1000);
+    }, 1500);
 
     const hideTextTimer = setTimeout(() => {
       setIsTextVisible(false);
-    }, 3500);
+    }, 4000);
 
     const hideScreenTimer = setTimeout(() => {
       setIsVisible(false);

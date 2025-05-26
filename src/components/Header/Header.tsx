@@ -18,24 +18,13 @@ export const Header = ({ currentTime }: HeaderProps) => {
       </div>
 
       <div className="flex items-center justify-center gap-8 z-20">
-        <ActionButton tooltip="Recherche">
-          <SearchIcon />
-        </ActionButton>
+        <ActionButton tooltip="Recherche"/>
         
-        <ActionButton tooltip="Paramètres">
-          <SettingsIcon />
-        </ActionButton>
+        <ActionButton tooltip="Paramètres" />
         
-        <ActionButton tooltip="Johnny Joe" variant="avatar">
-          <img 
-            src="/icons/avatar.png" 
-            alt="Avatar" 
-            className="size-9 rounded-full group-hover:scale-105 transition-all duration-300" 
-          />
-          <div className="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full"></div>
-        </ActionButton>
+        <ActionButton tooltip="Johnny Joe" />
 
-        <p className="text-white text-2xl font-light tracking-widest ms-4">
+        <p className="text-white/80 text-right text-2xl font-extralight tracking-widest w-20">
           {currentTime}
         </p>
       </div>
